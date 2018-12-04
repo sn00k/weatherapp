@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+    backend:
+        build: ./
+        links: 
+          - client
+          - database
+        container_name: weatherapp_backend
+        ports:
+          - '5000:5000'
+
+    client:
+        image: mhart/alpine-node:8.11.3
+        working_dir: /var/app
+        volumes:
+          - ./client:/var/app
+        container_name: weatherapp_client
+        ports:
+          - '3000:3000'
+        command: sh -c "yarn && yarn start"
+
+    database:
+        image: mongo:latest
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_ROOT_PASSWORD: topsecret
+          MYSQL_DATABASE: weatherapp
+          MONGO_DATA_DIR: /data/db
+          MONGO_LOG_DIR: /dev/null
+        volumes:
+          - ./backend/data/db:/data/db
+        ports:
+          - '27017:27017'
+        container_name: weatherapp_db
+        command: mongod --smallfiles --logpath=/dev/null # --quiet
