@@ -24,8 +24,8 @@ services:
         image: mongo:latest
         command: --default-authentication-plugin=mysql_native_password
         environment:
-          MYSQL_ROOT_PASSWORD: topsecret
-          MYSQL_DATABASE: weatherapp
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: topsecret
           MONGO_DATA_DIR: /data/db
           MONGO_LOG_DIR: /dev/null
         volumes:
