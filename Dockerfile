@@ -4,6 +4,7 @@ RUN mkdir -p /var/app
 WORKDIR /var/app 
 COPY ./backend/backend.csproj . 
 RUN dotnet restore ./backend.csproj 
+RUN dotnet add package MongoDB.Driver --version 2.7.2
 COPY ./backend .
 RUN dotnet publish -c release -o published 
 
