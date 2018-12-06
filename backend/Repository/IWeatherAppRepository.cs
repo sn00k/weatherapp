@@ -4,7 +4,7 @@ using backend.Models;
 
 namespace backend.Repository
 {
-    interface IWeatherAppRepository
+    public interface IWeatherAppRepository
     {
         Task<IEnumerable<WeatherLocation>> GetAllWeatherLocations();
         Task<WeatherLocation> GetWeatherLocation(string city);
