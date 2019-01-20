@@ -24,15 +24,12 @@ services:
 
     database:
         image: mongo:latest
-        command: --default-authentication-plugin=mysql_native_password
+        restart: always
         environment:
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: topsecret
-          MONGO_DATA_DIR: /data/db
-          MONGO_LOG_DIR: /dev/null
-        volumes:
-          - ./backend/data/db:/data/db
+          - MONGODB_USER="root" 
+          - MONGODB_PASS="topsecret"
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
         ports:
           - '27017:27017'
         container_name: weatherapp_db
-        command: mongod --smallfiles --logpath=/dev/null # --quiet
