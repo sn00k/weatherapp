@@ -7,7 +7,3 @@
 http://localhost:3000 Client - html/css/js(reactjs)
 
 http://localhost:5000 Backend - dotnet core web api.
-
-TODO
-------
-Add configs for production (Dockerfile, .net core, react/node) to VPS.
