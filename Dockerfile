@@ -1,16 +1,10 @@
-FROM microsoft/dotnet:2.1-sdk as builder  
+FROM microsoft/dotnet:2.1-sdk AS builder
 
-RUN mkdir -p /var/app
-WORKDIR /var/app 
-COPY ./backend/backend.csproj . 
-RUN dotnet restore ./backend.csproj 
+WORKDIR /var/app
 COPY ./backend .
-RUN dotnet publish -c release -o published 
-
-FROM microsoft/dotnet:2.1-runtime
-
-WORKDIR /var/app/
-COPY --from=builder /var/app/published .
 ENV ASPNETCORE_URLS=http://*:5000
 ENV ASPNETCORE_ENVIRONMENT=Development
-ENTRYPOINT ["dotnet", "backend.dll"]
+# Use native linux file polling for better performance
+ENV DOTNET_USE_POLLING_FILE_WATCHER 1
+RUN dotnet restore ./backend.csproj
+ENTRYPOINT [ "dotnet", "watch", "run"]
