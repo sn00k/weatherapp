@@ -21,19 +21,6 @@ class WeatherForm extends Component {
   onSubmit = async e => {
       e.preventDefault();
       this.props.onSubmit(this.state.text);
-      const apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
-      const userInput = this.state.text;
-      const temperatureUnit = "&units=metric";
-      const apiKey = `&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`;
-      const fullRequestUrl = apiUrl + userInput + temperatureUnit + apiKey;
-
-      const response = await fetch(fullRequestUrl);
-      const json = await response.json();
-      // const response = await fetch(
-      //   "https://jsonplaceholder.typicode.com/todos/1"
-      // );
-      // const { title } = await response.json();
-      //this.setState({ title, text: "" });
       this.setState({ text: "" });
     };
 
