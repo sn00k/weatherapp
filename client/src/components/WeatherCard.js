@@ -77,22 +77,14 @@ class WeatherCard extends Component {
             {searchStringFormatted}
           </Typography>
           <Typography variant="h5" component="h2" className={classes.temperature}>
-            <p class="weather__inline-block">{tempRounded}</p>
-            <img class="weather__inline-block weather__unit-icon" src={tempUnitIcon(1)} alt='Weather unit icon'/>
+            <p className="weather__inline-block">{tempRounded}</p>
+            <img className="weather__inline-block weather__unit-icon" src={tempUnitIcon(1)} alt='Weather unit icon'/>
           </Typography>
           <Typography className={classes.weather} color="textSecondary">
-            <img src={weatherIcon(weatherId, timeNow, timeSunrise, timeSunset)} class="weather__inline-block" alt='Weather icon'/>
-            <p class="weather__inline-block weather__item__margin-left">{weatherDescription}</p>
-          </Typography>
-          <Typography component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
+            <img src={weatherIcon(weatherId, timeNow, timeSunrise, timeSunset)} className="weather__inline-block" alt='Weather icon'/>
+            <template className="weather__inline-block weather__item__margin-left">{weatherDescription}</template>
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     );
   }
