@@ -10,4 +10,4 @@ http://localhost:3002 Client - html/css/js(reactjs)
 
 http://localhost:5002 Backend - dotnet core web api.
 
-[Live demo](https://weather.robins.nu)
+[Live demo](https://weather.robins.nu) running `master` branch.
