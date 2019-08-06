@@ -1,35 +1,48 @@
 version: "3"
 
+networks:
+  default:
+    external:
+      name: nginx-proxy
 services:
-    backend:
-        build: ./
-        volumes:
-          - ./backend:/var/app
-        links: 
-          - client
-          - database
-        container_name: weatherapp_backend
-        ports:
-          - '5000:5000'
+  backend:
+      build:
+        context: .
+        dockerfile: docker-compose.local
+      volumes:
+        - ./backend:/var/app
+      links: 
+        - client
+        - database
+      container_name: weatherapp_backend
+      ports:
+        - '5002:5002'
 
-    client:
-        image: mhart/alpine-node:8.11.3
-        working_dir: /var/app
-        volumes:
-          - ./client:/var/app
-        container_name: weatherapp_client
-        ports:
-          - '3000:3000'
-        command: sh -c "yarn && yarn start"
+  client:
+      image: mhart/alpine-node:8.11.3
+      working_dir: /var/app
+      volumes:
+        - ./client:/var/app
+      container_name: weatherapp_client
+      ports:
+        - '3002:3002'
+      command: sh -c "yarn && yarn start"
+      expose:
+        - "3002"
+      environment:
+        - VIRTUAL_HOST=weather.robins.nu,www.weather.robins.nu
+        - VIRTUAL_PORT=3002
+        - LETSENCRYPT_HOST=weather.robins.nu,www.weather.robins.nu
+        - LETSENCRYPT_EMAIL=hello@robins.nu
 
-    database:
-        image: mongo:latest
-        restart: always
-        environment:
-          - MONGODB_USER="root" 
-          - MONGODB_PASS="topsecret"
-          - MONGO_DATA_DIR=/data/db
-          - MONGO_LOG_DIR=/dev/null
-        ports:
-          - '27017:27017'
-        container_name: weatherapp_db
+  database:
+      image: mongo:latest
+      restart: always
+      environment:
+        - MONGODB_USER="root" 
+        - MONGODB_PASS="topsecret"
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      ports:
+        - '27017:27017'
+      container_name: weatherapp_db
