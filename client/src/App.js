@@ -39,7 +39,7 @@ class App extends Component {
         showWeatherCard: true,
       })
     }, 1000);
-    const apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
     const temperatureUnit = "&units=metric";
     const apiKey = `&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`;
     const fullRequestUrl = apiUrl + searchString + temperatureUnit + apiKey;
@@ -81,7 +81,7 @@ class App extends Component {
     const latParam = this.state.weather.lat;
     const longParam = this.state.weather.long;
     const apiKey = process.env.REACT_APP_GEONAMES_USERNAME;
-    const apiUrl = `http://api.geonames.org/timezoneJSON?lat=${latParam}&lng=${longParam}&username=${apiKey}`;
+    const apiUrl = `https://secure.geonames.org/timezoneJSON?lat=${latParam}&lng=${longParam}&username=${apiKey}`;
 
     const response = await fetch(apiUrl);
     return await response.json();
