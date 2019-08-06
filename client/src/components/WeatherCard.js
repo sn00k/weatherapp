@@ -5,12 +5,13 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import StarRateIcon from '@material-ui/icons/StarRate';
 import Typography from "@material-ui/core/Typography";
 import { weatherIcon, tempUnitIcon } from '../utils';
 
 const styles = {
   card: {
-    minWidth: 398,
+    maxWidth: 398,
     marginTop: 20
   },
   title: {
@@ -30,6 +31,10 @@ const styles = {
 };
 
 class WeatherCard extends Component {
+  handleClick = (e) => {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
   render() {
     const { classes } = this.props;
     const fetchFailed = this.props.data.fetchFailed;
@@ -84,14 +89,11 @@ class WeatherCard extends Component {
             <img src={weatherIcon(weatherId, timeNow, timeSunrise, timeSunset)} class="weather__inline-block" alt='Weather icon'/>
             <p class="weather__inline-block weather__item__margin-left">{weatherDescription}</p>
           </Typography>
-          <Typography component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button onClick={this.handleClick} size="small">
+            <StarRateIcon />
+          </Button>
         </CardActions>
       </Card>
     );

@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import { withStyles } from "@material-ui/core/styles";
 import WeatherForm from './components/WeatherForm';
 import WeatherCard from './components/WeatherCard';
+import WeatherList from './components/WeatherList';
+import Grid from '@material-ui/core/Grid';
 import './App.scss';
+
+const styles = {
+  container: {
+    justifyContent: "center"
+  }
+}
 
 class App extends Component {
   state = {
@@ -89,15 +98,23 @@ class App extends Component {
 
   render() {
     const {showWeatherCard} = this.state
+    const {classes} = this.props;
     return (
       <div className="App">
         <header className="App-header">
-          <WeatherForm onSubmit={this.onSubmit} />
-          {showWeatherCard && <WeatherCard data={this.state} />}
+          <Grid container justify="center" spacing={32}>
+            <Grid item xs={3}>
+              <WeatherList />
+            </Grid>
+            <Grid item xs={6}>
+              <WeatherForm onSubmit={this.onSubmit} />
+              {showWeatherCard && <WeatherCard data={this.state} />}
+            </Grid>
+          </Grid>
         </header>
       </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
