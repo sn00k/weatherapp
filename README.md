@@ -17,3 +17,4 @@ http://localhost:5002 Backend - dotnet core web api.
 2. Add favorite locations to a list
 3. Require authentication for favoriting locations to a personal list
 4. Add data store (firebase?) so each authenticated user has its own list of favorited locations
+5. Do something with the backend api???
